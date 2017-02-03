@@ -98,7 +98,6 @@ public class CoreService extends Service {
          *      1.Service 第一次被异常杀死后会在5秒内重启，第二次被杀死会在10秒内重启，第三次会在20秒内重启，
          *        一旦在短时间内 Service 被杀死达到5次，则系统不再拉起。
          *      2.进程被取得 Root 权限的管理工具或系统工具通过 forestop 停止掉，无法重启。
-         *
          */
         return START_STICKY;
     }

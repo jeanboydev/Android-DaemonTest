@@ -64,6 +64,9 @@ public class KeepLiveService extends Service {
         onEnd(rootIntent);
     }
 
+    /**
+     * 守护服务，运行在:daemon子进程中
+     */
     int onStart(Intent intent, int flags, int startId) {
 
         //启动前台服务而不显示通知的漏洞已在 API Level 25 修复
