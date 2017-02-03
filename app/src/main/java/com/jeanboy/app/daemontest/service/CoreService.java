@@ -77,7 +77,7 @@ public class CoreService extends Service {
         }
 
         //启动守护服务，运行在:daemon子进程中
-        startService(new Intent(getApplicationContext(), KeepLiveService.class));
+        startService(new Intent(getApplicationContext(), KeepAliveService.class));
 
         //----------业务逻辑----------
 
@@ -88,7 +88,7 @@ public class CoreService extends Service {
         //----------业务逻辑----------
 
         //守护 Service 组件的启用状态, 使其不被 MAT 等工具禁用
-        getPackageManager().setComponentEnabledSetting(new ComponentName(getPackageName(), KeepLiveService.class.getName()),
+        getPackageManager().setComponentEnabledSetting(new ComponentName(getPackageName(), KeepAliveService.class.getName()),
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
 
         /**
@@ -110,7 +110,7 @@ public class CoreService extends Service {
     void onEnd(Intent rootIntent) {
         System.out.println("保存数据到磁盘。");
         startService(new Intent(getApplicationContext(), CoreService.class));
-        startService(new Intent(getApplicationContext(), KeepLiveService.class));
+        startService(new Intent(getApplicationContext(), KeepAliveService.class));
     }
 
     /**

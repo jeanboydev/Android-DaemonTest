@@ -60,11 +60,11 @@
             android:process=":daemon" />
 
         <service
-            android:name=".service.KeepLiveService"
+            android:name=".service.KeepAliveService"
             android:process=":daemon" />
 
         <service
-            android:name=".service.KeepLiveService$KeepLiveNotificationService"
+            android:name=".service.KeepAliveService$KeepLiveNotificationService"
             android:process=":daemon" />
 
 

@@ -20,9 +20,9 @@ import com.jeanboy.app.daemontest.base.MainApplication;
  * Created by jeanboy on 2017/2/3.
  */
 
-public class KeepLiveService extends Service {
+public class KeepAliveService extends Service {
 
-    private final static String TAG = KeepLiveService.class.getSimpleName();
+    private final static String TAG = KeepAliveService.class.getSimpleName();
 
     private final static int ALARM_INTERVAL = 5 * 60 * 1000;//定时唤醒的时间间隔，5分钟
     private final static int WAKE_REQUEST_CODE = 6666;
@@ -73,12 +73,12 @@ public class KeepLiveService extends Service {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             //利用漏洞在 API Level 17 及以下的 Android 系统中，启动前台服务而不显示通知
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
-                startForeground(KeepLiveService.SERVICE_ID, new Notification());//API < 18 ，此方法能有效隐藏Notification上的图标
+                startForeground(KeepAliveService.SERVICE_ID, new Notification());//API < 18 ，此方法能有效隐藏Notification上的图标
             } else {
                 //利用漏洞在 API Level 18 及以上的 Android 系统中，启动前台服务而不显示通知
                 Intent innerIntent = new Intent(this, KeepLiveNotificationService.class);
                 startService(innerIntent);
-                startForeground(KeepLiveService.SERVICE_ID, new Notification());
+                startForeground(KeepAliveService.SERVICE_ID, new Notification());
             }
         }
 
@@ -110,7 +110,7 @@ public class KeepLiveService extends Service {
 
     void onEnd(Intent rootIntent) {
         startService(new Intent(getApplicationContext(), CoreService.class));
-        startService(new Intent(getApplicationContext(), KeepLiveService.class));
+        startService(new Intent(getApplicationContext(), KeepAliveService.class));
     }
 
 
@@ -137,7 +137,7 @@ public class KeepLiveService extends Service {
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
             Log.e(TAG, "onStartCommand");
-            startForeground(KeepLiveService.SERVICE_ID, new Notification());
+            startForeground(KeepAliveService.SERVICE_ID, new Notification());
             stopSelf();
             return START_STICKY;
         }
